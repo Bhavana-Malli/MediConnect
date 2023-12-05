@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Donor Page</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="/assets/style/style.css" />
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="javascript:void(0)" [routerLink]="['/dashboard']">
+      <img src="assets/img/logo.jpg" alt="Mediconnect" style="width:350px;height:90px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+  </nav>
+  <div class="container">
+    <div align="right">
+      <a routerLink="/login"><button class="btn pull-right btn-success"> Logout</button></a>
+    </div>
+    <h1 class="text-center mb-10">Donation Details</h1>
+
+    <div>
+      <table *ngIf="dondetails" class="table">
+        <thead>
+          <tr>
+            <th>DonorID</th>
+            <th>Organs</th>
+            <th>Medical Info</th>
+            <th>Name</th>
+            <th>Relationship</th>
+            <th>Contact</th>
+            <th>Address</th>
+            <th>Sign</th>
+            <th>CreatedDate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dondata of dondetails">
+            <td>{{ dondata.donorid }}</td>
+            <td>{{ dondata.organs }}</td>
+            <td>{{ dondata.medinfo }}</td>
+            <td>{{ dondata.name }}</td>
+            <td>{{ dondata.relationship }}</td>
+            <td>{{ dondata.contact }}</td>
+            <td>{{ dondata.address }}</td>
+            <td>{{ dondata.sign }}</td>
+            <td>{{ dondata.createddate }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <br />
+    <a routerLink="/dashboard"><button class="btn btn-primary pull-right"> Back</button></a>
+
+  </div>
+
+  <!-- Include Bootstrap and Angular scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-animate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-aria.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-messages.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-resource.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-route.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-sanitize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-touch.min.js"></script>
+
+  <!-- Include your custom Angular scripts here -->
+  <script>
+    // Define your Angular module and controller here
+  </script>
+
+  <!-- Include Bootstrap scripts -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Include Angular script -->
+  <script src="angular.min.js"></script>
+  <!-- Include your custom Angular script -->
+  <script src="script/script.js"></script>
+</body>
+</html>

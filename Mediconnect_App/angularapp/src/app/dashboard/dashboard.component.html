@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="/assets/style/dashboard.css" />
+  <link type="text/css" rel="stylesheet" href="/assets/style/style.css" />
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <div class="sidebar">
+      <a href="javascript:void(0)" class="navbar-brand" (click)="onLogoClick()">
+        <img src="assets/img/logo.jpg" alt="Mediconnect" style="width:199px;height:120px;object-fit: contain;">
+      </a>
+      <ul>
+        <a class="text-white side-link" href="javascript:void(0)" (click)="onLogoClick()">
+          <li><i class="fa fa-home mr-2"></i>Home</li>
+        </a>
+        <a class="text-white side-link" routerLink="/donor"><li><i class="fa fa-user mr-2"></i>Donor</li></a>
+        <a class="text-white side-link" routerLink="/recipient"><li><i class="fa fa-address-card mr-2"></i>Recipient</li></a>
+        <!-- <a class="text-white side-link" routerLink="/donation"><li><i class="fa fa-id-card-o mr-2"></i>Donations</li></a> -->
+        <a class="text-white side-link" routerLink="/hospital"><li><i class="fa fa-hospital-o mr-2"></i>Hospitals</li></a>
+        <a class="text-white side-link" routerLink="/view-donors"><li><i class="fa fa-id-card mr-2"></i>View Donors</li></a>
+        <a class="text-white side-link" routerLink="/view-recipients"><li><i class="fa fa-address-card mr-2"></i>View Recipients</li></a>
+        <div class="social_media">
+          <a href="https://www.facebook.com"><i class="fa fa-facebook-f"></i></a>
+          <a href="https://www.twitter.com"><i class="fa fa-twitter"></i></a>
+          <a href="https://www.instagram.com"><i class="fa fa-instagram"></i></a>
+        </div>
+      </ul>
+
+    </div>
+    <div class="main_content">
+      <div class="header d-flex justify-content-between">
+        <p>Welcome ‟{{userName}}” !! Have a nice day.</p>
+        <div class="d-flex">
+          <ul class="navbar-nav ml-auto d-flex flex-row">
+            <li class="nav-item ml-2">
+              <a class="nav-link" routerLink="/about-us">About us</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link" routerLink="/contact-us">Contact us</a>
+            </li>
+          </ul>
+          <div align="right">
+            <button (click)="onLogOut()" class="btn pull-right btn-success"> Logout</button>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-4">
+            <div class="column">
+              <a routerLink="/donor"><img src="assets/img/donate.jpg" alt="donor"></a>
+              <a routerLink="/donor">
+                <h3>Donor</h3>
+              </a>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="column">
+              <a routerLink="/recipient"><img src="assets/img/recipient.jpg" alt="donor"></a>
+              <a routerLink="/recipient">
+                <h3>Recipient</h3>
+              </a>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="column">
+              <a routerLink="/awareness"><img src="assets/img/awareness.jpg" alt="awareness"></a>
+              <a routerLink="/awareness">
+                <h3>Awareness</h3>
+              </a>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="column">
+              <a routerLink="/feedback"><img src="assets/img/feedback.jpg" alt="Feedback"></a>
+              <a routerLink="/feedback">
+                <h3>Feedback</h3>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

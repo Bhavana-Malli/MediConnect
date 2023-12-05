@@ -1,0 +1,175 @@
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="javascript:void(0)" routerLink="">
+    <img src="assets/img/logo.jpg" alt="Mediconnect" style="width:350px;height:90px;">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+</nav>
+
+<div class="container">
+  <h1 class="text-center mb-10">Register</h1>
+
+  <form [formGroup]="registrationForm">
+    <div class="row" *ngIf="showMsg">
+      <div class="col-xs-12">
+        <p class="alert alert-success">
+          <strong>Registration Success!</strong> Please click here to <a routerLink="/login">Login</a>
+        </p>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-xl-6">
+        <label for="firstname">First Name<span class="mandatory">*</span>:</label>
+        <input type="text" class="form-control" id="firstname" formControlName="firstname" required
+          [class.invalid-border]="registrationForm.get('firstname')?.invalid &&
+        (registrationForm.get('firstname')?.dirty || registrationForm.get('firstname')?.touched)">
+        <div *ngIf="registrationForm.get('firstname')?.invalid &&
+        (registrationForm.get('firstname')?.dirty || registrationForm.get('firstname')?.touched)"
+          class="text-danger small font-weight-bold mt-2">
+          First name is required.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lastname">Last Name<span class="mandatory">*</span>:</label>
+      <input type="text" class="form-control" id="lastname" formControlName="lastname" required [class.invalid-border]="registrationForm.get('lastname')?.invalid &&
+        (registrationForm.get('lastname')?.dirty || registrationForm.get('lastname')?.touched)">
+      <div *ngIf="registrationForm.get('lastname')?.invalid &&
+        (registrationForm.get('lastname')?.dirty || registrationForm.get('lastname')?.touched)"
+        class="text-danger small font-weight-bold mt-2">
+        Last name is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email Address<span class="mandatory">*</span>:</label>
+      <input type="email" class="form-control" id="email" formControlName="email" required [class.invalid-border]="registrationForm.get('email')?.invalid &&
+      (registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched)">
+      <div *ngIf="registrationForm.get('email')?.invalid &&
+      (registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched)"
+        class="text-danger small font-weight-bold mt-2">
+        Email is required or email pattern is invalid.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender<span class="mandatory">*</span>:</label>
+      <select class="form-control" id="gender" formControlName="gender" required [class.invalid-border]="registrationForm.get('lastname')?.invalid &&
+      (registrationForm.get('gender')?.dirty || registrationForm.get('gender')?.touched)">
+        <option value="" disabled selected>Select your gender</option>
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+        <option value="O">Other</option>
+      </select>
+
+      <div *ngIf="registrationForm.get('gender')?.invalid &&
+      (registrationForm.get('gender')?.dirty || registrationForm.get('gender')?.touched)"
+        class="text-danger small font-weight-bold mt-2">
+        Gender is required.</div>
+    </div>
+    <div class="form-group">
+      <label for="dateOfBirth">Date of Birth<span class="mandatory">*</span>:</label>
+      <input type="date" onfocus="this.showPicker()" class="form-control" formControlName="dob" id="dob"
+        required [class.invalid-border]="registrationForm.get('dob')?.invalid &&
+        (registrationForm.get('dob')?.dirty || registrationForm.get('dob')?.touched)">
+        <div *ngIf="registrationForm.get('dob')?.invalid &&
+        (registrationForm.get('dob')?.dirty || registrationForm.get('dob')?.touched)"
+        class="text-danger small font-weight-bold mt-2">
+          Date of birth is required.</div>
+    </div>
+    <div class="form-group">
+      <label for="bloodGroup">Blood Group<span class="mandatory">*</span>:</label>
+      <select class="form-control" id="bloodGroup" formControlName="bloodgroup" required
+      [class.invalid-border]="registrationForm.get('bloodgroup')?.invalid &&
+      (registrationForm.get('bloodgroup')?.dirty || registrationForm.get('bloodgroup')?.touched)">
+        <option value="" disabled selected>Select your blood group</option>
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+      </select>
+
+        <div *ngIf="registrationForm.get('bloodgroup')?.invalid &&
+        (registrationForm.get('bloodgroup')?.dirty || registrationForm.get('bloodgroup')?.touched)"
+        class="text-danger small font-weight-bold mt-2">
+          Blood group is required.</div>
+    </div>
+    <div class="form-group">
+      <label for="address">Address<span class="mandatory">*</span>:</label>
+      <input type="text" class="form-control" id="address" formControlName="address" required
+      [class.invalid-border]="registrationForm.get('address')?.invalid &&
+      (registrationForm.get('address')?.dirty || registrationForm.get('address')?.touched)">
+        <div *ngIf="registrationForm.get('address')?.invalid &&
+        (registrationForm.get('address')?.dirty || registrationForm.get('address')?.touched)"
+        class="text-danger small font-weight-bold mt-2">
+          Address is required.</div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-xl-6">
+        <label for="city">City<span class="mandatory">*</span>:</label>
+        <input type="text" class="form-control" id="city" formControlName="city" required
+        [class.invalid-border]="registrationForm.get('city')?.invalid &&
+        (registrationForm.get('city')?.dirty || registrationForm.get('city')?.touched)">
+        <div *ngIf="registrationForm.get('city')?.invalid &&
+        (registrationForm.get('city')?.dirty || registrationForm.get('city')?.touched)"
+        class="text-danger small font-weight-bold mt-2">
+          City is required.</div>
+      </div>
+      <div class="form-group col-xl-4">
+        <label for="state">State<span class="mandatory">*</span>:</label>
+        <input type="text" class="form-control" id="state" formControlName="state" required
+        [class.invalid-border]="registrationForm.get('state')?.invalid &&
+        (registrationForm.get('state')?.dirty || registrationForm.get('state')?.touched)">
+        <div *ngIf="registrationForm.get('state')?.invalid &&
+        (registrationForm.get('state')?.dirty || registrationForm.get('state')?.touched)"
+        class="text-danger small font-weight-bold mt-2">
+          State is required.</div>
+      </div>
+      <div class="form-group col-xl-2">
+        <label for="zipcode">Zipcode<span class="mandatory">*</span>:</label>
+        <input type="text" class="form-control" id="zipcode" formControlName="zipcode" required
+        [class.invalid-border]="registrationForm.get('zipcode')?.invalid &&
+        (registrationForm.get('zipcode')?.dirty || registrationForm.get('zipcode')?.touched)">
+        <div *ngIf="registrationForm.get('zipcode')?.invalid &&
+        (registrationForm.get('zipcode')?.dirty || registrationForm.get('zipcode')?.touched)"
+        class="text-danger small font-weight-bold mt-2">
+        Zipcode is required.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password<span class="mandatory">*</span>:</label>
+      <input type="password" class="form-control" id="password" formControlName="password" required
+      [class.invalid-border]="registrationForm.get('password')?.invalid &&
+      (registrationForm.get('password')?.dirty || registrationForm.get('password')?.touched)">
+      <div *ngIf="registrationForm.get('password')?.invalid &&
+      (registrationForm.get('password')?.dirty || registrationForm.get('password')?.touched)"
+      class="text-danger small font-weight-bold mt-2">
+        Password is required.</div>
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password<span class="mandatory">*</span>:</label>
+      <input type="password" class="form-control" id="confirmPassword" formControlName="confirmpassword" required
+      [class.invalid-border]="registrationForm.get('confirmpassword')?.invalid &&
+      (registrationForm.get('confirmpassword')?.dirty || registrationForm.get('confirmpassword')?.touched)">
+      <div *ngIf="registrationForm.get('confirmpassword')?.invalid &&
+      (registrationForm.get('confirmpassword')?.dirty || registrationForm.get('confirmpassword')?.touched)"
+      class="text-danger small font-weight-bold mt-2">
+      Confirm password is required.</div>
+    </div>
+
+    <div *ngIf="passwordMatchError && this.registrationForm.get('password')?.value !== this.registrationForm.get('confirmpassword')?.value" class="alert alert-danger" role="alert">
+      Password and Confirm Password didn't match.
+    </div>
+    <button class="btn btn-primary mr-1" (click)="saveUser()">Register</button>
+    <a routerLink="/login"><button type="button" class="btn btn-primary pull-right mr-1"> Back</button></a>
+    <button class="btn btn-primary" type="button" (click)="clearinput()">Clear </button>
+  </form>
+  <div class="register-link">
+    <p>Already have an account? <a routerLink="/login">Login here</a>.</p>
+  </div>
+</div>

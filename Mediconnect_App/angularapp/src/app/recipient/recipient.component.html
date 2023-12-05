@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html ng-app="recipientApp">
+
+<head>
+  <title>Organ Recipient Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="/assets/style/style.css" />
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="javascript:void(0)" [routerLink]="['/dashboard']">
+      <img src="assets/img/logo.jpg" alt="Mediconnect" style="width:350px;height:90px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about-us">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact-us">Contact us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/recipient">Recipient</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/donor">Donor</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/hospital">Hospitals</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/donation">Donations</a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+  <div class="container" ng-controller="RecipientController">
+    <div align="right">
+      <a routerLink="/login"><button class="btn pull-right btn-success"> Logout</button></a>
+    </div>
+    <h1 class="text-center mb-10">Organ Recipient Information</h1>
+
+    <form [formGroup]="recipientForm">
+      <div class="row" *ngIf="showMsg">
+        <div class="col-xs-12">
+          <p class="alert alert-success">
+            <strong>Recipient Registration Success!</strong>
+
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Organs Needed<span class="mandatory">*</span>:</label>
+        <div>
+          <div *ngFor="let organ of organs; index as i" class="form-check">
+            <input class="form-check-input" type="checkbox" [id]="'organ'+ organ.id" [(ngModel)]="organ.checked"
+            [ngModelOptions]="{standalone: true}"
+              [name]="organ.id" [value]="organ.id">
+            <label class="form-check-label" [for]="'organ'+ organ.id">{{organ.name}}</label>
+          </div>
+        </div>
+        <!-- <div class="form-group">
+          <label for="otherOrganInfo">Additional Organ Information:</label>
+          <input [readonly]="!recipientForm.get('selectedOrgans')?.value[organs.length - 1]" type="text" id="otherOrganInfo" formControlName="organsinfos" class="form-control"
+            [class.invalid-border]="isSubmitted && recipientForm.get('selectedOrgans')?.value[organs.length - 1] && recipientForm.get('organsinfos')?.value.length ===0 &&
+          (recipientForm.get('organsinfos')?.dirty || recipientForm.get('organsinfos')?.touched)">
+          <div *ngIf="isSubmitted && recipientForm.get('selectedOrgans')?.value[organs.length - 1] && recipientForm.get('organsinfos')?.value.length === 0 &&
+          (recipientForm.get('organsinfos')?.dirty || recipientForm.get('organsinfos')?.touched)"
+            class="text-danger small font-weight-bold mt-2">
+            Additional Organ Information is required, if other is selected.</div>
+        </div> -->
+        <div *ngIf="isSubmitted && recipientForm.get('selectedOrgans')?.value && !recipientForm.get('selectedOrgans')?.value.includes(true)"
+          class="text-danger small font-weight-bold mt-2">
+          Organs selection is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="bloodGroup">Blood Type:<span class="mandatory">*</span></label>
+        <select class="form-control" id="bloodtype" name="bloodGroup" formControlName="bloodtype" required
+          [class.invalid-border]="recipientForm.get('bloodtype')?.invalid &&
+        (recipientForm.get('bloodtype')?.dirty || recipientForm.get('bloodtype')?.touched)">
+          <option value="" disabled selected>Select your blood group</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
+
+        <div *ngIf="recipientForm.get('bloodtype')?.invalid &&
+        (recipientForm.get('bloodtype')?.dirty || recipientForm.get('bloodtype')?.touched)"
+          class="text-danger small font-weight-bold mt-2">
+          Blood type is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age<span class="mandatory">*</span>:</label>
+        <input type="text" id="age" name="age" class="form-control" formControlName="age" [class.invalid-border]="recipientForm.get('age')?.invalid &&
+        (recipientForm.get('age')?.dirty || recipientForm.get('age')?.touched)">
+        <div *ngIf="recipientForm.get('age')?.invalid &&
+        (recipientForm.get('age')?.dirty || recipientForm.get('age')?.touched)"
+          class="text-danger small font-weight-bold mt-2">
+          Age is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="emergencyName">Name<span class="mandatory">*</span></label>
+        <input type="text" id="emergencyName" name="emergencyName" class="form-control" formControlName="name"
+          [class.invalid-border]="recipientForm.get('name')?.invalid &&
+        (recipientForm.get('name')?.dirty || recipientForm.get('name')?.touched)">
+        <div *ngIf="recipientForm.get('name')?.invalid &&
+        (recipientForm.get('name')?.dirty || recipientForm.get('name')?.touched)"
+          class="text-danger small font-weight-bold mt-2">
+          Name is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="relationship">Relationship<span class="mandatory">*</span></label>
+        <input type="text" id="relationship" name="relationship" class="form-control" formControlName="relationship"
+          [class.invalid-border]="recipientForm.get('relationship')?.invalid &&
+        (recipientForm.get('relationship')?.dirty || recipientForm.get('relationship')?.touched)">
+        <div *ngIf="recipientForm.get('relationship')?.invalid &&
+        (recipientForm.get('relationship')?.dirty || recipientForm.get('relationship')?.touched)"
+          class="text-danger small font-weight-bold mt-2">
+          Relationship required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="contactNumber">Contact Number<span class="mandatory">*</span></label>
+        <input type="number" id="contactNumber" name="contactNumber"
+        class="form-control" formControlName="contact"
+          [class.invalid-border]="recipientForm.get('contact')?.invalid &&
+        (recipientForm.get('contact')?.dirty || recipientForm.get('contact')?.touched)">
+        <div *ngIf="recipientForm.get('contact')?.invalid &&
+        (recipientForm.get('contact')?.dirty || recipientForm.get('contact')?.touched)"
+          class="text-danger small font-weight-bold mt-2">
+          Contact number is required & should be of length 10.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address<span class="mandatory">*</span></label>
+        <input type="text" id="address" name="address" class="form-control" formControlName="address"
+          [class.invalid-border]="recipientForm.get('address')?.invalid &&
+        (recipientForm.get('address')?.dirty || recipientForm.get('address')?.touched)">
+        <div *ngIf="recipientForm.get('address')?.invalid &&
+        (recipientForm.get('address')?.dirty || recipientForm.get('address')?.touched)"
+          class="text-danger small font-weight-bold mt-2">
+          Address is required.</div>
+      </div>
+      <div *ngIf="errorMessage.length > 0">
+        {{errorMessage}}
+      </div>
+      <!-- Add additional options as needed -->
+      <button class="btn btn-primary mr-1" (click)="saveRecipient()">Submit</button>
+      <a routerLink="/dashboard"><button type="button" class="btn btn-primary mr-1"> Back</button></a>
+      <button class="btn btn-primary" type="button" (click)="clearinput()">Clear </button>
+    </form>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.9/angular.min.js"></script>
+</body>
+
+</html>

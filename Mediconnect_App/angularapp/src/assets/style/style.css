@@ -1,0 +1,96 @@
+body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+    .login-form {
+      margin-top: 50px;
+    }
+
+    .login-form h2 {
+      margin-bottom: 20px;
+    }
+    
+    
+    .text-center {
+      text-align: center;
+    }
+    
+    .mb-10 {
+      margin-bottom: 10px;
+    }
+    
+    .forgot-password {
+      text-align: center;
+    }
+    
+    .register-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .container {
+  margin: 0 auto;
+  margin-top: 50px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-heading {
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      font-weight: bold;
+    }
+    
+    .submit-button {
+      background-color: #007bff;
+      color: #ffffff;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hospital-tile {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #fff;
+    }
+.donation-card {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #fff;
+    }
+
+.reset-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .column {
+      width: 300px;
+      margin: 10px;
+    }
+
+    .column img {
+      width: 100%;
+      height: auto;
+    }
+    .row {
+      display: flex;
+      flex-direction: row;
+    }
+    .mandatory{
+      color:red;
+  }

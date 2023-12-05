@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+  <title>Donor Page</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link type="text/css" rel="stylesheet" href="/assets/style/style.css" />
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+</head>
+<body>
+  <form id="form1" runat="server">
+    <div>
+      <!-- Navigation Bar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand"  href="javascript:void(0)" [routerLink]="['/dashboard']">
+          <img src="assets/img/logo.jpg" alt="Mediconnect" style="width: 350px; height: 90px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/dashboard">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/about-us">About us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/contact-us">Contact us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/recipient">Recipient</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/donor">Donor</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/hospital">Hospitals</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/donation">Donations</a>
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        <div align="right">
+          <a routerLink="/login"><button class="btn pull-right btn-success"> Logout</button></a>
+        </div>
+        <h1 class="text-center mb-10">Nearby Hospitals</h1><br />
+        <div class="row">
+          <div class="col-md-4" *ngFor="let item of hospitals">
+            <div class="hospital-tile">
+              <h2>{{item.name}}</h2>
+              <p>{{item.address}}</p>
+              <p>Distance: {{item.distanceInKm}} km</p>
+              <div id="googlemap1" style="width: 150px; height: 350px;">
+                <iframe [src]="sanitize(item.googleMapLink)"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <a routerLink="/dashboard"><button class="btn btn-primary pull-right"> Back</button></a>
+      </div>
+      <!-- Include Bootstrap scripts -->
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </div>
+  </form>
+</body>
+</html>

@@ -1,0 +1,52 @@
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" routerLink="">
+      <img src="assets/img/logo.jpg" alt="Mediconnect" style="width:350px;height:90px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+  </nav>
+  <form name="registerForm">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-6">
+          <!-- Left Column with Image -->
+          <img src="assets/img/img.jpeg" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-xl-6">
+          <!-- Right Column with Login Form -->
+          <h1 class="text-center mb-10">Login</h1>
+          <div class="row" *ngIf="showMsg">
+            <div class="col-xs-12">
+              <p class="alert alert-danger">
+                <strong>Username or password is incorrect!</strong>
+              </p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email<span class="mandatory">*</span>:</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="userData.email" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password<span class="mandatory">*</span>:</label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="userData.password" required>
+          </div>
+          <div *ngIf="isValid">
+            <span class="mandatory">Email and Password are required.</span>
+          </div>
+          <button class="btn btn-primary pull-right mr-1" (click)="validateUser()"> Login</button>
+          <button class="btn btn-primary" (click)="clearinput()">Clear </button>
+          <div class="forgot-password">
+            <a routerLink="/forgot">Forgot password?</a>
+          </div>
+          <div class="register-link">
+            <p>Don't have an account? <a routerLink="/register">Register here</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>

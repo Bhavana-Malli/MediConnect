@@ -1,0 +1,105 @@
+<div class="container">
+  <div align="right">
+    <button (click)="onLogOut()" class="btn pull-right btn-success"> Logout</button>
+  </div>
+  <h1 class="text-center">Manage Donations</h1>
+  <span class="text-danger">Note: Donor having no health issues, is present in the top to bottom approach.</span>
+  <p>Total donation requests: {{donationCount}}</p>
+  <p>Total recipient requests: {{recipientCount}}</p>
+
+  <h2>Donation requests</h2>
+  <table *ngIf="donations.donorR" class="table table-striped table-responsive">
+    <thead>
+      <tr>
+        <th>
+      <tr>
+        <td>Action</td>
+        <td>Organ</td>
+        <td>Is Donated</td>
+        <td>Hospital Address</td>
+      </tr>
+      </th>
+      <th>Medical Info</th>
+      <th>Name</th>
+      <th>Relationship</th>
+      <th>Contact</th>
+      <th>Address</th>
+      <th>Sign</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dondata of donations.donorR">
+        <td>
+      <tr *ngFor="let item of dondata.organs; index as i">
+        <td>
+          <button (click)="approveOrReject(dondata, item, true)" *ngIf="!item.isDonated"
+            class="btn btn-success p-1 px-2">Approve</button>
+          <button (click)="approveOrReject(dondata, item)" *ngIf="item.isDonated"
+            class="btn btn-danger p-1 px-3">Reject</button>
+        </td>
+        <td>{{item.name}}</td>
+        <td>{{item.isDonated ? '✅': '⭕ PENDING'}}</td>
+        <td><input *ngIf="!item.isDonated && i === 0" type="text" placeholder="Enter hospital address"
+            [(ngModel)]="item.address" />
+        </td>
+      </tr>
+      </td>
+      <td>{{ dondata.medicalInfo }}</td>
+      <td>{{ dondata.name }}</td>
+      <td>{{ dondata.relationship }}</td>
+      <td>{{ dondata.contact }}</td>
+      <td>{{ dondata.address }}</td>
+      <td>{{ dondata.sign }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Recipient requests</h2>
+  <table *ngIf="donations.reciepientR" class="table table-striped table-responsive">
+    <thead>
+      <tr>
+        <th>
+      <tr>
+        <td>Action</td>
+        <td>Organ</td>
+        <td>Is Received</td>
+        <td>Hospital Address</td>
+      </tr>
+      </th>
+      <th>BloodType</th>
+      <th>Age</th>
+      <th>Name</th>
+      <th>Relationship</th>
+      <th>Contact</th>
+      <th>Address</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let recdata of donations.reciepientR">
+
+        <td>
+      <tr *ngFor="let item of recdata.organsList">
+        <td>
+          <button (click)="approveOrRejectRecipient(recdata, item, true)" *ngIf="!item.isReceived"
+            class="btn btn-success p-1 px-2">Approve</button>
+          <button (click)="approveOrRejectRecipient(recdata, item)" *ngIf="item.isReceived"
+            class="btn btn-danger p-1 px-3">Reject</button>
+
+        </td>
+        <td>{{item.name}}</td>
+        <td>{{item.isReceived ? '✅': '⭕ PENDING'}}</td>
+        <td><input *ngIf="!item.isReceived" type="text" placeholder="Enter hospital address"
+            [(ngModel)]="item.address" />
+        </td>
+      </tr>
+      </td>
+      <td>{{ recdata.bloodtype }}</td>
+      <td>{{ recdata.age }}</td>
+      <td>{{ recdata.name }}</td>
+      <td>{{ recdata.relationship }}</td>
+      <td>{{ recdata.contact }}</td>
+      <td>{{ recdata.address }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Donor Page</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="/assets/style/style.css" />
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="javascript:void(0)" [routerLink]="['/dashboard']">
+      <img src="assets/img/logo.jpg" alt="Mediconnect" style="width:350px;height:90px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about-us">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact-us">Contact us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/recipient">Recipient</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/donor">Donor</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/hospital">Hospitals</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/donation">Donations</a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <div align="right">
+      <a routerLink="/login"><button class="btn pull-right btn-success"> Logout</button></a>
+    </div>
+    <h1 class="text-center mb-10">Donor Details</h1>
+
+    <form [formGroup]="donorForm">
+      <div class="row" *ngIf="showMsg">
+        <div class="col-xs-12">
+          <p class="alert alert-success">
+            <strong>Donor Registration Success!</strong>
+          </p>
+        </div>
+      </div>
+      <h2>Organs<span class="mandatory">*</span>:</h2>
+      <ng-container *ngFor="let organ of organList; index as i">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [id]="'organ'+ organ.id" [(ngModel)]="organ.checked"
+            [ngModelOptions]="{standalone: true}" [name]="organ.id" [value]="organ.id">
+          <label class="form-check-label" [for]="'organ' + organ.id">{{organ.name}}</label>
+          <!-- <input *ngIf="i === organList.length - 1" [readonly]="!organList[organList.length - 1].checked"
+            formControlName="organinfos" class="form-control" type="text" id="otherOrgansInput" name="otherOrgansInput"
+            placeholder="Specify other organs"> -->
+        </div>
+
+      </ng-container>
+      <div *ngIf="isSubmitted && !checkOrgansSelected()" class="text-danger small font-weight-bold mt-2">
+        Organs is required.</div>
+      <div *ngIf="isSubmitted && checkOtherOrgansSelectedButNoContent()" class="text-danger small font-weight-bold mt-2">
+        Specify other organs is required.</div>
+
+      <h2>Medical Information:</h2>
+      <ng-container *ngFor="let med of meds; index as i">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="med.checked"
+            [ngModelOptions]="{standalone: true}" [id]="'med'+ med.id" [name]="med.id" [value]="med.id">
+          <label class="form-check-label" [for]="'med'+ med.id">{{med.name}}</label>
+          <!-- <input *ngIf="i === meds.length - 1" [readonly]="!meds[meds.length - 1].checked" class="form-control"
+            formControlName="medinfos" type="text" id="otherConditionsInput" name="otherConditionsInput"
+            placeholder="Specify other conditions"> -->
+        </div>
+
+      </ng-container>
+      <div *ngIf="isSubmitted && checkOtherMedsSelectedButNoContent()" class="text-danger small font-weight-bold mt-2">
+        Specify other medical information is required.</div>
+
+      <h2>Emergency Contact</h2>
+
+      <div class="form-group">
+        <label for="emergencyName">Name<span class="mandatory">*</span>:</label>
+        <input type="text" class="form-control" id="emergencyName" formControlName="name" name="emergencyName" required
+          [class.invalid-border]="donorForm.get('name')?.invalid &&
+        (donorForm.get('name')?.dirty || donorForm.get('name')?.touched)">
+        <div *ngIf="donorForm.get('name')?.invalid &&
+        (donorForm.get('name')?.dirty || donorForm.get('name')?.touched)"
+          class="text-danger small font-weight-bold mt-2">
+          Name is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="relationship">Relationship<span class="mandatory">*</span>:</label>
+        <input type="text" class="form-control" id="relationship" name="relationship" formControlName="relationship"
+          required [class.invalid-border]="donorForm.get('relationship')?.invalid &&
+          (donorForm.get('relationship')?.dirty || donorForm.get('relationship')?.touched)">
+        <div *ngIf="donorForm.get('relationship')?.invalid &&
+          (donorForm.get('relationship')?.dirty || donorForm.get('relationship')?.touched)"
+          class="text-danger small font-weight-bold mt-2">
+          Relationship is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="contactNumber">Contact Number<span class="mandatory">*</span>:</label>
+        <input type="number" class="form-control" id="contactNumber" name="contactNumber" formControlName="contact"
+          required [class.invalid-border]="donorForm.get('contact')?.invalid &&
+        (donorForm.get('contact')?.dirty || donorForm.get('contact')?.touched)">
+        <div *ngIf="donorForm.get('contact')?.invalid &&
+        (donorForm.get('contact')?.dirty || donorForm.get('contact')?.touched)"
+          class="text-danger small font-weight-bold mt-2">
+          Contact number is required & should be of length 10.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address<span class="mandatory">*</span>:</label>
+        <textarea class="form-control" id="address" name="address" formControlName="address" required
+          [class.invalid-border]="donorForm.get('address')?.invalid &&
+        (donorForm.get('address')?.dirty || donorForm.get('address')?.touched)"></textarea>
+
+        <div *ngIf="donorForm.get('address')?.invalid &&
+        (donorForm.get('address')?.dirty || donorForm.get('address')?.touched)"
+          class="text-danger small font-weight-bold mt-2">
+          Address is required.</div>
+      </div>
+
+      <h2>Signature</h2>
+
+      <div class="form-group">
+        <label for="signature">Signature<span class="mandatory">*</span>:</label>
+        <input type="text" class="form-control" id="signature" name="signature" formControlName="sign" required
+          [class.invalid-border]="donorForm.get('sign')?.invalid &&
+        (donorForm.get('sign')?.dirty || donorForm.get('sign')?.touched)">
+        <div *ngIf="donorForm.get('sign')?.invalid &&
+        (donorForm.get('sign')?.dirty || donorForm.get('sign')?.touched)"
+          class="text-danger small font-weight-bold mt-2">
+          Signature is required.</div>
+      </div>
+
+      <div *ngIf="errorMessage.length > 0">
+        {{errorMessage}}
+      </div>
+      <h3>Organ Donation Consent:- </h3>
+      <p>Thank you for considering organ donation. Please read and acknowledge the following statements before proceeding:</p>
+      <input type="checkbox" formControlName="donationConsent" id="donationConsentCheckbox" name="donationConsent" value="acknowledged">
+      <label for="donationConsentCheckbox">
+        I hereby acknowledge and confirm the following:
+      </label>
+      <div *ngIf="donorForm.get('donationConsent')?.invalid &&
+      (donorForm.get('donationConsent')?.dirty || donorForm.get('donationConsent')?.touched)"
+        class="text-danger small font-weight-bold mb-2">
+        Please acccept the acknowledge.</div>
+         <ul>
+        <li>I voluntarily offer to donate my organs and tissues upon my demise for transplantation or scientific purposes, as specified in this form.</li>
+        <li>I understand the significance and implications of organ and tissue donation and have had the opportunity to ask questions and receive answers to my satisfaction.</li>
+        <li>I am aware that my decision to donate does not affect the medical care I receive now or in the future.</li>
+        <li>I understand that I can change or revoke my decision at any time by informing the appropriate authorities or by updating this form.</li>
+        <li>I have been informed about how my personal information will be used and protected in connection with my donation, and I consent to its use for these purposes.</li>
+        <li>I am not under any form of duress or influence, and I make this decision freely and without any expectation of monetary or other rewards.</li>
+      </ul>
+      <button class="btn btn-primary mr-1" (click)="saveDonor()">Submit</button>
+      <a routerLink="/dashboard"><button type="button" class="btn btn-primary mr-1"> Back</button></a>
+      <button type="button" class="btn btn-primary" (click)="clearinput()">Clear </button>
+    </form>
+  </div>
+
+  <!-- Include Bootstrap and Angular scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-animate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-aria.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-messages.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-resource.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-route.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-sanitize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-touch.min.js"></script>
+
+  <!-- Include your custom Angular scripts here -->
+  <script>
+    // Define your Angular module and controller here
+  </script>
+
+  <!-- Include Bootstrap scripts -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Include Angular script -->
+  <script src="angular.min.js"></script>
+  <!-- Include your custom Angular script -->
+  <script src="script/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Forgot Password</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="/assets/style/style.css" />
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="javascript:void(0)" routerLink="">
+      <img src="assets/img/logo.jpg" alt="Mediconnect" style="width:350px;height:90px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+  </nav>
+  <div class="container">
+    <h1 class="text-center mb-10">Forgot Password</h1>
+    <form>
+      <label for="firstName">First Name:<span class="mandatory">*</span>:</label>
+      <input type="text" class="form-control" id="firstName" name="firstName" required><br>
+
+
+      <label for="email">Email:<span class="mandatory">*</span>:</label>
+      <input type="email" class="form-control" id="email" name="email" required><br>
+
+      <label for="dateOfBirth">Date of Birth:<span class="mandatory">*</span>:</label>
+      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required><br>
+
+      <button class="btn btn-primary mr-1" ng-click="submitForm()">Reset Password</button>
+      <a routerLink="/login"><button class="btn btn-primary pull-right"> Back</button></a>
+    </form>
+    <div class="reset-link">
+      <p>Remembered your password? <a routerLink="/login">Login here</a>.</p>
+    </div>
+  </div>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

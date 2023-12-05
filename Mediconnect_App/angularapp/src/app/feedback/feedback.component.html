@@ -1,0 +1,64 @@
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="javascript:void(0)" [routerLink]="['/dashboard']">
+      <img src="assets/img/logo.jpg" alt="Mediconnect" style="width:350px;height:90px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about-us">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact-us">Contact us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/recipient">Recipient</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/donor">Donor</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/hospital">Hospitals</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/donation">Donations</a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+  <header>
+    <h1>Feedback</h1>
+  </header>
+  <section class="content">
+    <div *ngIf="successMessage" class="alert alert-success" role="alert">
+      {{successMessage}}
+    </div>
+    <div class="box">
+      <div class="wrapper">
+        <p id="message">Your feedback matters</p>
+        <div class="container">
+          <button *ngFor="let item of [].constructor(5); index as i" (click)="onStarClick(i+ 1)" [class.active]="i+1 === starValue" class="star-container inactive">
+            <span class="number-container">{{i+1}}</span>
+          </button>
+        </div>
+        <textarea [(ngModel)]="description" class="form-control mt-4" placeholder="Give your feedback here..." rows="3"></textarea>
+        <div *ngIf="errorMessage.length > 0" class="text-danger small mt-2">{{errorMessage}}</div>
+        <button id="submit" (click)="onSubmit()" >Submit</button>
+
+        <div id="submitSection" class="hide">
+          <p id="submitMessage">Thanks for your feedback.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
